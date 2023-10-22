@@ -1,15 +1,29 @@
 package com.nuffquantumsayd.tictactoe
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val gameBoardButtons = getListOfButtons()
 
+
+        //identify text box
+        val textView = findViewById<TextView>(R.id.textView)
+
+        //Identify new game button and set a listener for it
+        val newGameButton = findViewById<Button>(R.id.new_game)
+        newGameButton.setOnClickListener{
+            newGamePressed(textView, gameBoardButtons)
+        }
+
+    }
+
+    private fun getListOfButtons(): List<Button> {
         //identify other buttons to set with
         //top row
         val topLeftButton = findViewById<Button>(R.id.top_left)
@@ -25,21 +39,19 @@ class MainActivity : AppCompatActivity() {
         val bottomRightButton = findViewById<Button>(R.id.bottom_right)
 
         //put buttons into arraylist of buttons
-        val gameBoardButtons = listOf<Button>(topLeftButton, topMiddleButton, topRightButton,
-                                                middleLeftButton, middleMiddleButton, middleRightButton,
-                                               bottomLeftButton, bottomMiddleButton, bottomRightButton)
-
-
-        //Identify new game button and set a listener for it
-        val newGameButton = findViewById<Button>(R.id.new_game)
-        newGameButton.setOnClickListener{
-            newGamePressed()
-        }
-
+        val gameBoardButtons = listOf<Button>(
+            topLeftButton, topMiddleButton, topRightButton,
+            middleLeftButton, middleMiddleButton, middleRightButton,
+            bottomLeftButton, bottomMiddleButton, bottomRightButton
+        )
+        return gameBoardButtons
     }
-    private fun newGamePressed(){
-        val toastText = "new game was pressed"
-        Toast.makeText(this,toastText, Toast.LENGTH_SHORT).show()
+
+    private fun newGamePressed(textView: TextView, list: List<Button>){
+        textView.text = "Player X turn"
+        for (i in 0..< list.size){
+            list[i].text = ""
+        }
     }
 
 }
