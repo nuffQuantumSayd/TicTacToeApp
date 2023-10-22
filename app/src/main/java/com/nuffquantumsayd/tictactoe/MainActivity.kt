@@ -9,6 +9,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //Get list of all buttons
         val gameBoardButtons = getListOfButtons()
 
 
@@ -23,6 +25,10 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /*
+    this function gets all buttons buttons from the game board, adds them to a list,
+    then returns the list
+     */
     private fun getListOfButtons(): List<Button> {
         //identify other buttons to set with
         //top row
@@ -47,6 +53,10 @@ class MainActivity : AppCompatActivity() {
         return gameBoardButtons
     }
 
+    /*
+    this function resets the game board buttons and starts a new game with Player X as the first
+    player
+     */
     private fun newGamePressed(textView: TextView, list: List<Button>){
         textView.text = "Player X turn"
         for (i in 0..< list.size){
