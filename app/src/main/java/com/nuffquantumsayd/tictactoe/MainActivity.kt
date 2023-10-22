@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     player
      */
     private fun newGamePressed(textView: TextView, list: List<Button>){
-        textView.text = "Player X turn"
+        textView.text = getString(R.string.player_x_turn)
         for (i in 0..< list.size){
             list[i].text = ""
         }
