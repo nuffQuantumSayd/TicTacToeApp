@@ -21,12 +21,14 @@ class MainActivity : AppCompatActivity() {
         for (i in 0..< gameBoardButtons.size) {
             gameBoardButtons[i].setOnClickListener {
                 if (playerX) {
+                    gameBoardButtons[i].isEnabled = false
                     gameBoardButtons[i].text = "X"
                     playerX = false
                     playerO = true
                     textView.text = getString(R.string.player_o_turn)
                 }
                 else {
+                    gameBoardButtons[i].isEnabled = false
                     gameBoardButtons[i].text = "O"
                     playerO = false
                     playerX = true
@@ -80,6 +82,7 @@ class MainActivity : AppCompatActivity() {
     private fun newGamePressed(textView: TextView, list: List<Button>){
         textView.text = getString(R.string.player_x_turn)
         for (i in 0..< list.size){
+            list[i].isEnabled = true
             list[i].text = ""
         }
     }
