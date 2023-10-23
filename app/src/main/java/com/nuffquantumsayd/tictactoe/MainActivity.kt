@@ -10,9 +10,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var playerX = true
+        var playerO = false
+
         //Get list of all buttons
         val gameBoardButtons = getListOfButtons()
 
+        for (i in 0..< gameBoardButtons.size) {
+            gameBoardButtons[i].setOnClickListener {
+                if (playerX) {
+                    gameBoardButtons[i].text = "X"
+                    playerX = false
+                    playerO = true
+                }
+                else {
+                    gameBoardButtons[i].text = "O"
+                    playerO = false
+                    playerX = true
+                }
+            }
+        }
 
         //identify text box
         val textView = findViewById<TextView>(R.id.textView)
