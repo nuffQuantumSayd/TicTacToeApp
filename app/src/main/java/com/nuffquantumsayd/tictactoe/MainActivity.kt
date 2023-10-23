@@ -10,8 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var playerX = true
-        var playerO = false
+        val playersTurn = PlayersTurn(playerX = true, playerO = false)
 
         //Get list of all buttons
         val gameBoardButtons = getListOfButtons()
@@ -20,18 +19,18 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..< gameBoardButtons.size) {
             gameBoardButtons[i].setOnClickListener {
-                if (playerX) {
+                if (playersTurn.playerX) {
                     gameBoardButtons[i].isEnabled = false
                     gameBoardButtons[i].text = "X"
-                    playerX = false
-                    playerO = true
+                    playersTurn.playerX = false
+                    playersTurn.playerO = true
                     textView.text = getString(R.string.player_o_turn)
                 }
                 else {
                     gameBoardButtons[i].isEnabled = false
                     gameBoardButtons[i].text = "O"
-                    playerO = false
-                    playerX = true
+                    playersTurn.playerO = false
+                    playersTurn.playerX = true
                     textView.text = getString(R.string.player_x_turn)
                 }
             }
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         //Identify new game button and set a listener for it
         val newGameButton = findViewById<Button>(R.id.new_game)
         newGameButton.setOnClickListener{
-            newGamePressed(textView, gameBoardButtons)
+            newGamePressed(textView, gameBoardButtons, playersTurn)
         }
 
     }
@@ -79,7 +78,9 @@ class MainActivity : AppCompatActivity() {
     this function resets the game board buttons and starts a new game with Player X as the first
     player
      */
-    private fun newGamePressed(textView: TextView, list: List<Button>){
+    private fun newGamePressed(textView: TextView, list: List<Button>, playersTurn: PlayersTurn){
+        playersTurn.playerX = true
+        playersTurn.playerO = false
         textView.text = getString(R.string.player_x_turn)
         for (i in 0..< list.size){
             list[i].isEnabled = true
