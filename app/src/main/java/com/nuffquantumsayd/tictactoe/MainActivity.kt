@@ -17,7 +17,23 @@ class MainActivity : AppCompatActivity() {
         //identify text box
         val textView = findViewById<TextView>(R.id.textView)
 
-        for (i in 0..< gameBoardButtons.size) {
+        //Game buttons functionality
+        ButtonGamePlay(gameBoardButtons, playersTurn, textView)
+
+        //Identify new game button and set a listener for it
+        val newGameButton = findViewById<Button>(R.id.new_game)
+        newGameButton.setOnClickListener{
+            newGamePressed(textView, gameBoardButtons, playersTurn)
+        }
+
+    }
+
+    private fun ButtonGamePlay(
+        gameBoardButtons: List<Button>,
+        playersTurn: PlayersTurn,
+        textView: TextView
+    ) {
+        for (i in 0..<gameBoardButtons.size) {
             gameBoardButtons[i].setOnClickListener {
                 if (playersTurn.playerX) {
                     gameBoardButtons[i].isEnabled = false
@@ -25,8 +41,7 @@ class MainActivity : AppCompatActivity() {
                     playersTurn.playerX = false
                     playersTurn.playerO = true
                     textView.text = getString(R.string.player_o_turn)
-                }
-                else {
+                } else {
                     gameBoardButtons[i].isEnabled = false
                     gameBoardButtons[i].text = "O"
                     playersTurn.playerO = false
@@ -35,15 +50,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-
-        //Identify new game button and set a listener for it
-        val newGameButton = findViewById<Button>(R.id.new_game)
-        newGameButton.setOnClickListener{
-            newGamePressed(textView, gameBoardButtons, playersTurn)
-        }
-
     }
 
     /*
