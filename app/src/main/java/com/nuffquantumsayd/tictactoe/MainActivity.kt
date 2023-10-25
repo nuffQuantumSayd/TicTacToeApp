@@ -3,6 +3,7 @@ package com.nuffquantumsayd.tictactoe
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             newGamePressed(textView, gameBoardButtons, playersTurn)
         }
 
+        //Game logic for win
     }
 
     private fun ButtonGamePlay(
@@ -33,20 +35,34 @@ class MainActivity : AppCompatActivity() {
         playersTurn: PlayersTurn,
         textView: TextView
     ) {
+        var buttonCount = 0
         for (i in 0..<gameBoardButtons.size) {
             gameBoardButtons[i].setOnClickListener {
-                if (playersTurn.playerX) {
-                    gameBoardButtons[i].isEnabled = false
-                    gameBoardButtons[i].text = "X"
-                    playersTurn.playerX = false
-                    playersTurn.playerO = true
-                    textView.text = getString(R.string.player_o_turn)
+                if (buttonCount < 8) {
+                    if (playersTurn.playerX) {
+                        buttonCount++
+                        Toast.makeText(this, "$buttonCount", Toast.LENGTH_SHORT).show()
+                        gameBoardButtons[i].isEnabled = false
+                        gameBoardButtons[i].text = "X"
+                        playersTurn.playerX = false
+                        playersTurn.playerO = true
+                        textView.text = getString(R.string.player_o_turn)
+                    } else {
+                        buttonCount++
+                        Toast.makeText(this, "$buttonCount", Toast.LENGTH_SHORT).show()
+                        gameBoardButtons[i].isEnabled = false
+                        gameBoardButtons[i].text = "O"
+                        playersTurn.playerO = false
+                        playersTurn.playerX = true
+                        textView.text = getString(R.string.player_x_turn)
+                    }
                 } else {
-                    gameBoardButtons[i].isEnabled = false
-                    gameBoardButtons[i].text = "O"
-                    playersTurn.playerO = false
-                    playersTurn.playerX = true
-                    textView.text = getString(R.string.player_x_turn)
+                    if (playersTurn.playerX) {
+                        gameBoardButtons[i].text = "X"
+                    } else {
+                        gameBoardButtons[i].text = "O"
+                    }
+                    textView.text = getString(R.string.tie_player_x_and_player_o_win)
                 }
             }
         }
