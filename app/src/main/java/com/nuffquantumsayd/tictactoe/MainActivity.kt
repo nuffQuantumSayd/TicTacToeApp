@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             newGamePressed(textView, gameBoardButtons, playersTurn, buttonCounter)
         }
 
-        //Game logic for win
+        
     }
 
     private fun ButtonGamePlay(
