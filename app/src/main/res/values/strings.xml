@@ -3,4 +3,7 @@
     <string name="new_game">New Game</string>
     <string name="player_x_turn">Player X turn</string>
     <string name="player_o_turn">Player O turn</string>
+    <string name="tie_player_x_and_player_o_win">Tie, Player X and Player O win!</string>
+    <string name="player_x_wins">Player X wins!</string>
+    <string name="player_o_wins">Player O wins</string>
 </resources>
